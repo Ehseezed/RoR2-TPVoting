@@ -2,7 +2,7 @@
 using R2API.Utils;
 using RoR2;
 
-namespace Mordrog
+namespace TPVoting
 {
     [BepInDependency("com.bepis.r2api")]
     [NetworkCompatibility(CompatibilityLevel.NoNeedForSync)]
@@ -13,7 +13,7 @@ namespace Mordrog
         public const string ModName = "TPVoting";
         public const string ModGuid = "com.Mordrog.TPVoting";
 
-        public TPLockerController TPLockerController { get; private set; }
+        public TPVotingSystem TPVotingSystem { get; private set; }
 
         public TPVotingPlugin()
         {
@@ -31,9 +31,11 @@ namespace Mordrog
             orig(self);
 
             if (PluginConfig.IgnoredGameModes.Value.Contains(GameModeCatalog.GetGameModeName(self.gameModeIndex)))
+            {
                 return;
+            }
 
-            TPLockerController = base.gameObject.AddComponent<TPLockerController>();
+            TPVotingSystem = gameObject.AddComponent<TPVotingSystem>();
 
         }
 
@@ -41,10 +43,10 @@ namespace Mordrog
         {
             orig(self);
 
-            if (PluginConfig.IgnoredGameModes.Value.Contains(GameModeCatalog.GetGameModeName(self.gameModeIndex)))
-                return;
-
-            Destroy(TPLockerController);
+            if (TPVotingSystem)
+            {
+                Destroy(TPVotingSystem);
+            }
         }
 
         private void InitConfig()

@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace Mordrog
+namespace TPVoting
 {
     public static class UsersHelper
     {

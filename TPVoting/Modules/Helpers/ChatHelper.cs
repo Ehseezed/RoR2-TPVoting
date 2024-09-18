@@ -1,4 +1,4 @@
-﻿namespace Mordrog
+﻿namespace TPVoting
 {
     public static class ChatHelper
     {

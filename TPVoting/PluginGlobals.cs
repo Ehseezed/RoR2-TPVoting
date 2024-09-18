@@ -1,7 +1,7 @@
 ﻿using RoR2;
 using System.Collections.Generic;
 
-namespace Mordrog
+namespace TPVoting
 {
     public static class PluginGlobals
     {
@@ -14,14 +14,6 @@ namespace Mordrog
             "limbo",
             "outro",
             "voidraid"
-        };
-
-        public static List<string> PortalOnlyStages = new List<string>
-        {
-            "bazaar",
-            "goldshores",
-            "artifactworld",
-            "mysteryspace",
         };
     }
 }
