@@ -13,6 +13,7 @@ namespace TPVoting
             MajorityVotesCountdownTime;
 
         public static ConfigEntry<bool>
-            UserAutoVoteOnDeath;
+            UserAutoVoteOnDeath,
+            VoteAfterTPEvent;
     }
 }

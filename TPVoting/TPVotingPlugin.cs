@@ -76,7 +76,14 @@ namespace TPVoting
                 "Settings",
                 "UserAutoVoteOnDeath",
                 true,
-                "Should players auto vote tp start when they die."
+                "Should players auto vote tp when they die."
+            );
+
+            PluginConfig.VoteAfterTPEvent = Config.Bind<bool>(
+                "Settings",
+                "VoteAfterTPEvent",
+                false,
+                "Should tp voting also be activated after tp event."
             );
         }
     }

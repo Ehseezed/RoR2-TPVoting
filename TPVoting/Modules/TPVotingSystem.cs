@@ -24,6 +24,7 @@ namespace TPVoting
             tpLocker.OnLockedTPInteractionAttempt += TpLocker_OnLockedTPInteractionAttempt;
 
             On.RoR2.Run.OnServerSceneChanged += Run_OnServerSceneChanged;
+            On.RoR2.TeleporterInteraction.ChargedState.OnEnter += TeleporterInteraction_ChargedState_OnEnter;
         }
 
         public void OnDestroy()
@@ -36,6 +37,7 @@ namespace TPVoting
             Destroy(tpLocker);
 
             On.RoR2.Run.OnServerSceneChanged -= Run_OnServerSceneChanged;
+            On.RoR2.TeleporterInteraction.ChargedState.OnEnter -= TeleporterInteraction_ChargedState_OnEnter;
         }
 
         private void TPVotingController_OnTPVotingStarted()
@@ -64,9 +66,14 @@ namespace TPVoting
             TryStartVoting(true);
         }
 
-        private bool CheckIfCurrentStageQualifyForTPVoting()
+        private void TeleporterInteraction_ChargedState_OnEnter(On.RoR2.TeleporterInteraction.ChargedState.orig_OnEnter orig, EntityStates.BaseState self)
         {
-            return !PluginGlobals.IgnoredStages.Contains(SceneCatalog.GetSceneDefForCurrentScene().baseSceneName);
+            orig(self);
+
+            if (PluginConfig.VoteAfterTPEvent.Value)
+            {
+                TryStartVoting(false);
+            }
         }
 
         private void TryStartVoting(bool showInstruction)
@@ -79,6 +86,11 @@ namespace TPVoting
             }
 
             TPVotingController.StartVoting(showInstruction);
+        }
+
+        private bool CheckIfCurrentStageQualifyForTPVoting()
+        {
+            return !PluginGlobals.IgnoredStages.Contains(SceneCatalog.GetSceneDefForCurrentScene().baseSceneName);
         }
     }
 }
