@@ -10,15 +10,20 @@ NOW WORKS WITH PORTALS! (void is intentionally excluded)
 | Setting                       | Default Value       |
 | :---------------------------- | :-----------------: |
 | PlayerIsReadyMessages         |       "r,rdy,ready" |
-| IgnoredGameModes              |  "IgnoredGameModes" |
+| IgnoredGameModes              |  "InfiniteTowerRun" |
 | MajorityVotesCountdownTime    |                  30 |
 | UserAutoVoteOnDeath           |                true |
+| VoteAfterTPEvent              |               false |
 
 ## More
 
 Find my other mods here: https://thunderstore.io/package/Mordrog/
 
 ### Changelog
+#### 1.3.0
+- Fix for Seekers of the Storm changes
+- Added option for TP voting after TP event ended
+
 #### 1.2.3
 - Update manifest + rebuild on new patch
 
