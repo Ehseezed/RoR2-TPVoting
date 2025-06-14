@@ -65,7 +65,7 @@ namespace TPVoting
         {
             votingMachine.CheckVotingEndCondition = (VotingMachine<NetworkUserId> votingMachine) => 
             {
-                if (votingMachine.CheckIfHalfOrMoreVoted())
+                if (votingMachine.CheckIfRequiredVoted())
                 {
                     if (!isMajorityTPVotingTimerRunning)
                     {

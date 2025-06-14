@@ -121,9 +121,19 @@ namespace TPVoting
             return votes.Count == 1;
         }
 
-        public bool CheckIfHalfOrMoreVoted()
+        public bool CheckIfRequiredVoted()
         {
-            return votes.Count(kv => kv.Value == true) >= UnityEngine.Mathf.CeilToInt((float)votes.Count / 2);
+            int percentageOfTotal = UnityEngine.Mathf.CeilToInt(PluginConfig.PercentageOfTotal.Value/100);
+            int currentVotes = UnityEngine.Mathf.CeilToInt(votes.Count(kv => kv.Value == true)/votes.Count);
+            if (currentVotes >= percentageOfTotal)
+            {
+                return true;
+            }
+            else
+            {
+                UnityEngine.Debug.Log($"VotingMachine::CheckIfRequiredVoted: Not enough votes. Required: {percentageOfTotal}, Current: {currentVotes}");
+                return false;
+            }
         }
     }
 }

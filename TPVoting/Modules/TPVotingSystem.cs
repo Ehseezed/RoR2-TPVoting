@@ -1,4 +1,5 @@
-﻿using UnityEngine.Networking;
+﻿using EntityStates;
+using UnityEngine.Networking;
 using RoR2;
 
 namespace TPVoting
@@ -40,6 +41,11 @@ namespace TPVoting
             On.RoR2.TeleporterInteraction.ChargedState.OnEnter -= TeleporterInteraction_ChargedState_OnEnter;
         }
 
+        private void TeleporterInteraction_ChargedState_OnEnter(On.RoR2.TeleporterInteraction.ChargedState.orig_OnEnter orig, BaseState self)
+        {
+            throw new System.NotImplementedException();
+        }
+
         private void TPVotingController_OnTPVotingStarted()
         {
             tpLocker.IsTPUnlocked = false;
@@ -66,7 +72,7 @@ namespace TPVoting
             TryStartVoting(true);
         }
 
-        private void TeleporterInteraction_ChargedState_OnEnter(On.RoR2.TeleporterInteraction.ChargedState.orig_OnEnter orig, EntityStates.BaseState self)
+        private void TeleporterInteraction_ChargedState_OnEnter(On.RoR2.TeleporterInteraction.ChargedState.orig_OnEnter orig, TeleporterInteraction.ChargedState self)
         {
             orig(self);
 

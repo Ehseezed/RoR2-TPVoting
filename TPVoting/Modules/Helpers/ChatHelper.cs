@@ -33,7 +33,7 @@
             RoR2.Chat.SendBroadcastChat(new RoR2.Chat.SimpleChatMessage { baseToken = message });
         }
 
-        public static void TPCountdown(uint unlockTime)
+        public static void TPCountdown(int unlockTime)
         {
             var message = $"Starting <color=#{RedColor}>Teleporter</color> unlock <color=#{YellowColor}>countdown!</color> <color=#{GrayColor}>({unlockTime} seconds left)</color>";
             RoR2.Chat.SendBroadcastChat(new RoR2.Chat.SimpleChatMessage { baseToken = message });

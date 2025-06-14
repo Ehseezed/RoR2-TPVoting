@@ -1,6 +1,11 @@
-﻿using BepInEx;
+﻿using System.Runtime.CompilerServices;
+using BepInEx;
 using R2API.Utils;
+using RiskOfOptions;
+using RiskOfOptions.OptionConfigs;
+using RiskOfOptions.Options;
 using RoR2;
+using static TPVoting.PluginConfig;
 
 namespace TPVoting
 {
@@ -30,7 +35,7 @@ namespace TPVoting
         {
             orig(self);
 
-            if (PluginConfig.IgnoredGameModes.Value.Contains(GameModeCatalog.GetGameModeName(self.gameModeIndex)))
+            if (IgnoredGameModes.Value.Contains(GameModeCatalog.GetGameModeName(self.gameModeIndex)))
             {
                 return;
             }
@@ -51,40 +56,64 @@ namespace TPVoting
 
         private void InitConfig()
         {
-            PluginConfig.PlayerIsReadyMessages = Config.Bind<string>(
+            PlayerIsReadyMessages = Config.Bind<string>(
                 "Settings",
                 "PlayerIsReadyMessages",
                 "r,rdy,ready",
                 "The message the player has to write in the chat to confirm they are ready. Values must be separated by comma."
             );
 
-            PluginConfig.IgnoredGameModes = Config.Bind<string>(
+            IgnoredGameModes = Config.Bind<string>(
                 "Settings",
                 "IgnoredGameModes",
                 "InfiniteTowerRun",
-                "Gamemode in which tp voting should not work."
+                "Gamemode in which tp voting should not work. Values must be separated by comma. Possible values: 'InfiniteTowerRun', 'EclipseRun', 'ClassicRun', 'WeeklyRun'"
             );
 
-            PluginConfig.MajorityVotesCountdownTime = Config.Bind<uint>(
+            MajorityVotesCountdownTime = Config.Bind<int>(
                 "Settings",
                 "MajorityVotesCountdownTime",
                 30,
-                "Countdown in seconds to unlock the teleporter when half or most of the players are ready."
+                "Countdown in seconds to unlock the teleporter when 'majority' of the players are ready."
             );
 
-            PluginConfig.UserAutoVoteOnDeath = Config.Bind<bool>(
+            PercentageOfTotal = Config.Bind<float>(
+                "Settings",
+                "PercentageOfTotal",
+                50f,
+                "Percentage of total players that need to be ready to start the countdown. Value must be between 0 and 1."
+            );
+
+            UserAutoVoteOnDeath = Config.Bind<bool>(
                 "Settings",
                 "UserAutoVoteOnDeath",
                 true,
                 "Should players auto vote tp when they die."
             );
 
-            PluginConfig.VoteAfterTPEvent = Config.Bind<bool>(
+            VoteAfterTPEvent = Config.Bind<bool>(
                 "Settings",
                 "VoteAfterTPEvent",
                 false,
                 "Should tp voting also be activated after tp event."
             );
+
+            if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Mordrog.TPVoting"))
+            {
+                AddConfigOptions();
+            }
         }
+
+        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
+        private static void AddConfigOptions()
+        {
+            ModSettingsManager.AddOption(new StringInputFieldOption(PlayerIsReadyMessages));
+            ModSettingsManager.AddOption(new StringInputFieldOption(IgnoredGameModes));
+            ModSettingsManager.AddOption(new IntSliderOption(MajorityVotesCountdownTime, new IntSliderConfig() { min = 0, max = 100}));
+            ModSettingsManager.AddOption(new SliderOption(PercentageOfTotal, new SliderConfig() { min = 0, max = 100}));
+            ModSettingsManager.AddOption(new CheckBoxOption(UserAutoVoteOnDeath));
+            ModSettingsManager.AddOption(new CheckBoxOption(VoteAfterTPEvent));
+        }
+
     }
 }

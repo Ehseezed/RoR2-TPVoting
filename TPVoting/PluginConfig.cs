@@ -9,8 +9,11 @@ namespace TPVoting
             PlayerIsReadyMessages,
             IgnoredGameModes;
 
-        public static ConfigEntry<uint>
+        public static ConfigEntry<int>
             MajorityVotesCountdownTime;
+
+        public static ConfigEntry<float>
+            PercentageOfTotal;
 
         public static ConfigEntry<bool>
             UserAutoVoteOnDeath,
