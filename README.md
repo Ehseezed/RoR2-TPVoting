@@ -2,7 +2,7 @@
 RoR2 mod - provides a voting system for the teleporter in your games
 
 ### How it works
-Mod will lock players from starting teleporter until voting is passed. To prevent stalling, if half or majority players voted, countdown will begin after which teleporter will be unlocked. Players can vote by writting "r" in chat or by interacting with a portal or teleporter for the first time.  Adequate communication in the game is already made for the player to understand how voting works.
+Mod will lock players from starting teleporter until voting is passed. To prevent stalling, if the majority threshold is reached, countdown will begin after which teleporter will be unlocked. Players can vote by writting "r" in chat or by interacting with a portal or teleporter for the first time.  Adequate communication in the game is already made for the player to understand how voting works.
 
 NOW WORKS WITH PORTALS! (void is intentionally excluded)
 
@@ -12,6 +12,7 @@ NOW WORKS WITH PORTALS! (void is intentionally excluded)
 | PlayerIsReadyMessages         |       "r,rdy,ready" |
 | IgnoredGameModes              |  "InfiniteTowerRun" |
 | MajorityVotesCountdownTime    |                  30 |
+| MajorityVotesPercentage       |                 50% |
 | UserAutoVoteOnDeath           |                true |
 | VoteAfterTPEvent              |               false |
 
@@ -20,6 +21,10 @@ NOW WORKS WITH PORTALS! (void is intentionally excluded)
 Find my other mods here: https://thunderstore.io/package/Mordrog/
 
 ### Changelog
+#### 1.4.0
+- Risk of Options support
+- Added option to select the majority votes percentage
+
 #### 1.3.0
 - Fix for Seekers of the Storm changes
 - Added option for TP voting after TP event ended
